@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PriorityQues
 {
-    class PriorityQueue<TElement, TPriority> : IPriorityQueue<TElement, TPriority>
+    public class PriorityQueue<TElement, TPriority> : IPriorityQueue<TElement, TPriority>
     {
         public PriorityQueue()
         {
@@ -15,7 +15,7 @@ namespace PriorityQues
 
         }
 
-        public int Count => throw new NotImplementedException();
+        public int Count  { get; private set; }
 
         public IPriorityQueueHandle<TElement, TPriority> Dequeue()
         {
@@ -24,7 +24,8 @@ namespace PriorityQues
 
         public IPriorityQueueHandle<TElement, TPriority> Enqueue(TElement element, TPriority priority)
         {
-            throw new NotImplementedException();
+            Count++;
+            return new PriorityQueueHandle<TElement, TPriority>(element, priority);
         }
 
         public bool TryDequeue(out TElement element, out TPriority priority)

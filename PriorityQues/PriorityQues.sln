@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriorityQues", "PriorityQues.csproj", "{B14D18AC-1727-458A-AC05-41377F89C808}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriorityQuesTest", "PriorityQuesTest\PriorityQuesTest.csproj", "{C668DB57-BA88-4666-8AAD-D7BD06CE32CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B14D18AC-1727-458A-AC05-41377F89C808}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B14D18AC-1727-458A-AC05-41377F89C808}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B14D18AC-1727-458A-AC05-41377F89C808}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C668DB57-BA88-4666-8AAD-D7BD06CE32CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C668DB57-BA88-4666-8AAD-D7BD06CE32CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C668DB57-BA88-4666-8AAD-D7BD06CE32CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C668DB57-BA88-4666-8AAD-D7BD06CE32CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
