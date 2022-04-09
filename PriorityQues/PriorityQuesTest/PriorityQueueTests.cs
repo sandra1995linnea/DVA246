@@ -46,5 +46,69 @@ namespace PriorityQues.Tests
             Assert.AreEqual(3, queue.Count);
         }
 
+        [TestMethod]
+        public void DequeueShallCrashOnEmptyQueue()
+        {
+            PriorityQueue<int, int> queue = new PriorityQueue<int, int>();
+
+            Assert.ThrowsException<InvalidOperationException>(() => queue.Dequeue());
+        }
+
+        [TestMethod]
+        public void DequeueShallReturnHandle()
+        {
+            PriorityQueue<int, int> queue = new PriorityQueue<int, int>();
+            queue.Enqueue(5, 1);
+            IPriorityQueueHandle<int, int> handle = queue.Dequeue();
+
+            Assert.AreEqual(5, handle.Element);
+            Assert.AreEqual(1, handle.Priority);
+        }
+
+        [TestMethod]
+        public void DequeueShallDecreaseCout()
+        {
+            PriorityQueue<int, int> queue = new PriorityQueue<int, int>();
+            queue.Enqueue(5, 1);
+            queue.Dequeue();
+
+            Assert.AreEqual(0, queue.Count);
+        }
+
+        [TestMethod]
+        public void EnqueShallAdd_DequeueShallRemove_SamePriorities()
+        {
+            PriorityQueue<int, int> queue = new PriorityQueue<int, int>();
+            queue.Enqueue(5, 1);
+            queue.Enqueue(6, 1);
+            Assert.AreEqual(2, queue.Count);
+
+            IPriorityQueueHandle<int, int> handle = queue.Dequeue();
+            Assert.AreEqual(5, handle.Element);
+            Assert.AreEqual(1, handle.Priority);
+            Assert.AreEqual(1, queue.Count);
+
+            handle = queue.Dequeue();
+            Assert.AreEqual(6, handle.Element);
+            Assert.AreEqual(1, handle.Priority);
+            Assert.AreEqual(0, queue.Count);
+        }
+
+        [TestMethod]
+        public void EnqueShallAdd_DequeueShallRemove_DifferentPriorities()
+        {
+            PriorityQueue<int, int> queue = new PriorityQueue<int, int>();
+            queue.Enqueue(5, 1);
+            queue.Enqueue(6, 2);
+            queue.Enqueue(7, 3);
+            queue.Enqueue(2, 3);
+            queue.Enqueue(7, 1);
+            queue.Enqueue(10, 3);
+
+            IPriorityQueueHandle<int, int> handle = queue.Dequeue();
+            Assert.AreEqual(7, handle.Element);
+            Assert.AreEqual(3, handle.Priority);
+            Assert.AreEqual(5, queue.Count);
+        }
     }
 }
