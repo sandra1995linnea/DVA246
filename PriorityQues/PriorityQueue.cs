@@ -60,7 +60,7 @@ namespace PriorityQues
             {
                 for (index = 0; index < priorities.Count; index++)
                 {
-                    if (0 < comparer.Compare(priority, priorities[index]))
+                    if (0 > comparer.Compare(priority, priorities[index]))
                     {
                         break;
                     }
@@ -79,12 +79,34 @@ namespace PriorityQues
 
         public bool TryDequeue(out TElement element, out TPriority priority)
         {
-            throw new NotImplementedException();
+            if(Count == 0)
+            {
+                element = default(TElement);
+                priority = default(TPriority);
+                return false;
+            }
+
+            var handle =  Dequeue();
+            element = handle.Element;
+            priority = handle.Priority;
+
+            return true;
+            
         }
 
         public bool TryPeek(out TElement element, out TPriority priority)
         {
-            throw new NotImplementedException();
+            if(Count == 0)
+            {
+                element = default(TElement);
+                priority = default(TPriority);
+                return false;
+            }
+
+            priority = priorities[0];
+            element = elements[0][0];
+
+            return true;
         }
     }
 }

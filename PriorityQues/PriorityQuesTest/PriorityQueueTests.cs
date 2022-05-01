@@ -106,9 +106,99 @@ namespace PriorityQues.Tests
             queue.Enqueue(10, 3);
 
             IPriorityQueueHandle<int, int> handle = queue.Dequeue();
+            Assert.AreEqual(5, handle.Element);
+            Assert.AreEqual(1, handle.Priority);
+            Assert.AreEqual(5, queue.Count);
+
+            handle = queue.Dequeue();
+            Assert.AreEqual(7, handle.Element);
+            Assert.AreEqual(1, handle.Priority);
+            Assert.AreEqual(4, queue.Count);
+
+            handle = queue.Dequeue();
+            Assert.AreEqual(6, handle.Element);
+            Assert.AreEqual(2, handle.Priority);
+            Assert.AreEqual(3, queue.Count);
+
+            handle = queue.Dequeue();
             Assert.AreEqual(7, handle.Element);
             Assert.AreEqual(3, handle.Priority);
-            Assert.AreEqual(5, queue.Count);
+            Assert.AreEqual(2, queue.Count);
+
+            handle = queue.Dequeue();
+            Assert.AreEqual(2, handle.Element);
+            Assert.AreEqual(3, handle.Priority);
+            Assert.AreEqual(1, queue.Count);
+
+            handle = queue.Dequeue();
+            Assert.AreEqual(10, handle.Element);
+            Assert.AreEqual(3, handle.Priority);
+            Assert.AreEqual(0, queue.Count);
         }
+
+        [TestMethod]
+        public void TryDequeue_EmptyQueue()
+        {
+            PriorityQueue<int, int> queue = new PriorityQueue<int, int>();
+            int element, prio;
+            bool actual = queue.TryDequeue(out element, out prio);
+
+            Assert.AreEqual(false, actual);
+            Assert.AreEqual(0, element);
+            Assert.AreEqual(0, prio);
+        }
+
+        [TestMethod]
+        public void TryDequeue_EmptyQueue_StringAsElementAndPrio()
+        {
+            PriorityQueue<string, string> queue = new PriorityQueue<string, string>();
+            string element, prio;
+            bool actual = queue.TryDequeue(out element, out prio);
+
+            Assert.AreEqual(false, actual);
+            Assert.AreEqual(null, element);
+            Assert.AreEqual(null, prio);
+        }
+
+        [TestMethod]
+        public void TryDequeueShallReturnTrueAndOutParameters()
+        {
+            PriorityQueue<int, int> queue = new PriorityQueue<int, int>();
+            int element, prio;
+
+            queue.Enqueue(5, 1);
+            bool actual = queue.TryDequeue(out element, out prio);
+
+            Assert.IsTrue(actual);
+            Assert.AreEqual(5, element);
+            Assert.AreEqual(1, prio);
+        }
+
+        [TestMethod]
+        public void TryPeek_EmptyQueue()
+        {
+            PriorityQueue<int, int> queue = new PriorityQueue<int, int>();
+            int element, prio;
+
+            bool actual = queue.TryPeek(out element, out prio);
+            Assert.AreEqual(false, actual);
+            Assert.AreEqual(0, element);
+            Assert.AreEqual(0, prio);
+        }
+
+        [TestMethod]
+        public void TryPeekShallReturnTrueAndOutParameters()
+        {
+            PriorityQueue<int, int> queue = new PriorityQueue<int, int>();
+            int element, prio;
+
+            queue.Enqueue(6, 1);
+            bool actual = queue.TryPeek(out element, out prio);
+
+            Assert.IsTrue(actual);
+            Assert.AreEqual(6, element);
+            Assert.AreEqual(1, prio);
+        }
+
     }
 }
